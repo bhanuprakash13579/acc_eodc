@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="position: relative; background-color: #84A7A1; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+    <a href="{% url 'search_modify' %}" style="margin-right: 10px; position: fixed; bottom: 20px; right: 16px "><button>Search & Modify</button></a>
+    <form method="post"  style="background-color: #E5E5CB; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); width: 400px;">
+      {% csrf_token %}
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div class="form-row">{{ form.importer_name.label_tag }}   {{ form.importer_name }} </div>
+
+        <div class="form-row">{{ form.iec_code.label_tag }}    {{ form.iec_code }}</div>
+
+        {{ form.address.label_tag }}    {{ form.address}}
+
+        <div class="form-row">{{ form.license_number.label_tag }}     {{ form.license_number }}</div>
+
+        <div class="form-row">{{ form.lic_date.label_tag }}     {{ form.lic_date }}</div>
+
+        <div class="form-row">{{ form.bond_number.label_tag }}    {{ form.bond_number }}</div>
+
+        <div class="form-row">{{ form.bond_date.label_tag }}    {{ form.bond_date }}</div>
+
+        <div class="form-row">{{ form.bond_amt_executed.label_tag }}    {{ form.bond_amt_executed }}</div>
+
+        <div class="form-row">{{ form.duty_saved.label_tag }}    {{ form.duty_saved }}</div>
+
+        <div class="form-row">{{ form.items_imported.label_tag }}   {{ form.items_imported }}</div>
+
+        <div class="form-row">{{ form.gmail_id.label_tag }}    {{ form.gmail_id }}</div>
+
+        <div class="form-row">{{ form.radio_choice.label_tag }}    {{ form.radio_choice }}</div>
+
+        <button type="submit" id="submit-button" style="background-color: #363333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Submit</button>
+      </div>
+    </form>
+    <div>
+    <a href="{% url 'login' %}" style="margin-right: 10px; position: fixed; top: 20px; right: 16px "><button>Logout</button></a>
+  </div>
+
+    <div>
+    <a href="{% url 'send_reminder_emails' %}" style="margin-right: 10px; position: fixed; top: 50px; right: 16px "><button>send mails</button></a>
+  </div>
+
+  </div>
+
+{% endblock %}

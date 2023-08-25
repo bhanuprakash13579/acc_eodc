@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .form-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .form-row label {
+            flex: 1;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .form-row input {
+            flex: 2;
+        }
+
+        .form-row label, .form-row input {
+            text-align: left;
+        }
+
+
+        .image-container {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body bgcolor="#84A7A1">
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

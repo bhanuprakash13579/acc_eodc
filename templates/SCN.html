@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="image-container">
+    <img src="{{ base64_image }}" alt="Chennai Customs">
+</div>
+<h1 align ='center' style=font-size:25px>SHOW CAUSE NOTICE</h1>
+<h1 style="font-family:'Times New Roman', serif,font-weight: 100">
+{{ data.importer_name }}, {{ data.address }}  (hereinafter referred as "the importer"), holding Import Export Code No. {{ data.iec_code }}
+    had imported capital goods viz.  {{ data.items_imported }} under {{ data.radio_choice }}
+    Licence No {{ data.license_number }} dated {{ data.lic_date }} by saving actual duty of Rs. {{ data.duty_saved }}
+    and had cleared the same vide below-mentioned Bill of Entry at zero duty while availing the benefit of
+    exemption available under Notification No. 16/2015 dated 01.04.2015. The details of import are as under:<br>
+2. The importer had executed Bond dated {{ data.bond_date }} for Rs. {{ bond_amt_executed }} /- for {{ data.radio_choice }}
+    License No. {{ license_number }}  dated {{ data.lic_date }} . They had also given an undertaking to fulfill the conditions
+    of the Bond, {{ data.radio_choice }} License and the relevant Customs Notification at the time of registration of
+    the {{ data.radio_choice }} License at New Custom House, Meenambakkam, Chennai - 600027.<br>
+3. The Capital goods were to be installed at {{ data.address }}.
+</h1>
+{% endblock %}

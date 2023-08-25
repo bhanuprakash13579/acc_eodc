@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="background-color: #84A7A1; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+    <form method="post"  action="{% url 'update_data' %}" style="background-color: #E5E5CB; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); width: 400px;">
+      {% csrf_token %}
+
+      <label >importer name : {{present.importer_name}}</label>
+       <br><br>
+      <label >address       : {{present.address}} </label>
+      <br><br>
+      <label >license num   : {{present.license_number}}</label>
+      <br><br>
+      <label >license date  : {{present.lic_date}}</label>
+      <br><br>
+      <label >bond number   : {{present.bond_number}}</label>
+      <br><br>
+      <label >gmail id      : {{present.gmail_id}}</label>
+      <br><br>
+      <label >bond type     : {{present.radio_choice}}</label>
+      <br><br>
+
+      <label >EODC produced : {{present.is_eodc_produced}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="eodc_true">True</label>
+      <input type="radio" id="eodc_true" name="is_eodc_produced" value="True" >&ensp;&ensp;
+      <label for="dgft_false">False</label>
+      <input type="radio" id="eodc_false" name="is_eodc_produced" value="False">
+      <br><br>
+
+
+      <label >DGFT ack      : {{present.is_dgft_ack_produced}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="dgft_true">True</label>
+      <input type="radio" id="dgft_true" name="is_dgft_ack_produced" value="True" >&ensp;&ensp;
+      <label for="dgft_false">False</label>
+      <input type="radio" id="dgft_false" name="is_dgft_ack_produced" value="False">
+      <br><br>
+
+      <label >letter issued : {{present.is_letter_issued}}</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="letter_true">True</label>
+      <input type="radio" id="letter_true" name="is_letter_issued" value="True" >&ensp;&ensp;
+      <label for="letter_false">False</label>
+      <input type="radio" id="letter_false" name="is_letter_issued" value="False">&ensp;&ensp;
+      <br><br>
+
+
+      <label >SCN issued    : {{present.is_scn_issued}}</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="scn_true">True</label>
+      <input type="radio" id="scn_true" name="is_scn_issued" value="True" >&ensp;&ensp;
+      <label for="scn_false">False</label>
+      <input type="radio" id="scn_false" name="is_scn_issued" value="False">&ensp;&ensp;
+      <br><br>
+
+
+      <label >PH1 issued    : {{present.is_ph1_issued}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="ph1_true">True</label>
+      <input type="radio" id="ph1_true" name="is_ph1_issued" value="True" >&ensp;&ensp;
+      <label for="ph1_false">False</label>
+      <input type="radio" id="ph1_false" name="is_ph1_issued" value="False">&ensp;&ensp;
+      <br><br>
+
+
+      <label >PH2 issued    : {{present.is_ph2_issued}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="ph2_true">True</label>
+      <input type="radio" id="ph2_true" name="is_ph2_issued" value="True" >&ensp;&ensp;
+      <label for="ph2_false">False</label>
+      <input type="radio" id="ph2_false" name="is_ph2_issued" value="False">&ensp;&ensp;
+      <br><br>
+
+
+      <label >OIO issued    : {{present.is_oio_issued}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="OIO_true">True</label>
+      <input type="radio" id="OIO_true" name="is_oio_issued" value="True" >&ensp;&ensp;
+      <label for="OIO_false">False</label>
+      <input type="radio" id="OIO_false" name="is_oio_issued" value="False">&ensp;&ensp;
+      <br><br>
+
+      <label >paused    : {{present.is_paused}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="paused_true">True</label>
+      <input type="radio" id="paused_true" name="is_paused" value="True" >&ensp;&ensp;
+      <label for="paused_false">False</label>
+      <input type="radio" id="paused_false" name="is_paused" value="False">&ensp;&ensp;
+      <br><br>
+
+      <label >closed    : {{present.is_closed}}</label> &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      <label for="paused_true">True</label>
+      <input type="radio" id="closed_true" name="is_closed" value="True" >&ensp;&ensp;
+      <label for="paused_false">False</label>
+      <input type="radio" id="closed_false" name="is_closed" value="False">&ensp;&ensp;
+
+      <br><br><br>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button  type="submit" id="submit-button" style="background-color: #363333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Modify</button>
+        </div>
+    </form>
+    <a href="{% url 'search_modify' %}" style="margin-top: 10px; position: fixed; bottom: 20px; right: 16px"><button>Back to Search</button></a>
+  </div>
+<div>
+    <a href="{% url 'login' %}" style="margin-right: 10px; position: fixed; top: 20px; right: 16px "><button>Logout</button></a>
+  </div>
+{% endblock %}
