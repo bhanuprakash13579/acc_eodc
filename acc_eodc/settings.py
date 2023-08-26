@@ -83,21 +83,19 @@ WSGI_APPLICATION = 'acc_eodc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'acc_eodc',
-#         'USER':'postgres',
-#         'PASSWORD':'1234',
-#         'HOST':'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'acc_eodc',
+        'USER':'postgres',
+        'PASSWORD':'1234',
+        'HOST':'localhost',
+        'PORT': '5432',
+    }
+}
 
 database_url = os.environ.get("DATABASE_URL")
-DATABASES = {
-    "default": dj_database_url.parse("database_url")
-}
+DATABASES["default"]= dj_database_url.parse("database_url")
 
 
 # Password validation
