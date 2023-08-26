@@ -164,10 +164,21 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'#'bhanu.prakash13579@gov.in'
-EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk'
+EMAIL_HOST_USER = os.environ.get("sender_email",'bhanuprakashnaidu13579@gmail.com')##'bhanu.prakash13579@gov.in'
+EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd",'grwfoxfjhzgcscgk')
 
 # If DEBUG is True, Django will serve static files during development
 if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+deputy_cmsnr = os.environ.get("deputy_cmsnr","Acting")
+epcg_time_gap = os.environ.get("epcg_time_gap",2555)
+letter_time_gap = os.environ.get("letter_time_gap",30)
+ph1_time_gap = os.environ.get("ph1_time_gap",30)
+ph2_time_gap = os.environ.get("ph2_time_gap",30)
+oio_time_gap = os.environ.get("oio_time_gap",30)
+
+decc_time_gap = os.environ.get("decc_time_gap",730)
+
+office_mail_id = os.environ.get("office_mail_id",'eodcacc@gmail.com')

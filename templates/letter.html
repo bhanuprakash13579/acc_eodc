@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="image-container">
+    <img src="{{ base64_image }}" alt="Chennai Customs">
+</div>
+<h1 align="right">{{present_date}}</h1>
+<h1 align ='center' style=font-size:25px></h1>
+<h1 style="font-family:'Times New Roman', serif,font-weight: 100">
+To<br>
+M/s {{ data.importer_name }}<br>
+{{data.address}}<br><br>
+sir,<br>
+    sub :- Non-submission of EODC/Redemption letter for {{data.radio_choice}} License(s)-reg.<br><br>
+    Please refer to the above cited subject, the details of Bond executed by you against the licence(s) registered<br>
+in INMAA4 for the import of goods under the {{data.radio_choice}} scheme are given below:-<br><br>
+                LIC NO                     LIC DATE                 BOND NO <br>
+         {{data.license_number}}      {{data.lic_date}}      {{data.bond_number}} <br>
+    In this regard, you are hereby informed that the export obligation- period for the above mentioned<br>
+license(s) have expired and this office has not received EODC/ Redemption letter issued by the licensing authority <br>
+towards the discharge of Export Obligation.<br><br>
+    In case the export obligation is fulfilled and EODC/Redemption letter obtained from DGFT, the same may
+be submitted for cancellation of Bond executed against the said licence. If you have not fulfilled the export<br>
+obligation against the said licence(s), it is hereby reiterated that you are required to pay the duty amount along with<br>
+applicable interest till the payment of duty as per Customs Act, 1962.
+    You are hereby requested to communicate within 15 days from the date receipt of this letter, failing which <br>
+the action may be initiated as per the provision of Customs Act, 1962.<br>
+</h1>
+<h1 align="right">
+    {{DC}}
+    DEPUTY COMMISSIONER OF CUSTOMS
+    EODC-ACC
+</h1>
+{% endblock %}
