@@ -165,10 +165,10 @@ EMAIL_PORT =  587                                                               
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = os.environ.get("sender_email")     #############################
-#EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd")             #############################
-#EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk'
+#EMAIL_HOST_USER = os.environ.get("sender_email")     #############################
+EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'
+#EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd")             #############################
+EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk'
 
 # If DEBUG is True, Django will serve static files during development
 if DEBUG:
