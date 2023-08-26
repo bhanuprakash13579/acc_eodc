@@ -11,14 +11,10 @@ from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from xhtml2pdf import pisa
 
+# import win32com.client
+from acc_eodc import settings
 from .forms import ImporterForm
 from .models import Importer
-
-from io import BytesIO
-import subprocess
-#import win32com.client
-import pythoncom
-from acc_eodc import settings
 
 
 def generate_pdf(html_content):
