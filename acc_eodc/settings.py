@@ -175,7 +175,7 @@ if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-deputy_cmsnr = os.environ.get("deputy_cmsnr","Acting")                                #############################
+deputy_cmsnr = os.environ.get("deputy_cmsnr")                                #############################
 epcg_time_gap = os.environ.get("epcg_time_gap",2555)
 letter_time_gap = os.environ.get("letter_time_gap",30)
 ph1_time_gap = os.environ.get("ph1_time_gap",30)
@@ -184,8 +184,8 @@ oio_time_gap = os.environ.get("oio_time_gap",30)
 
 decc_time_gap = os.environ.get("decc_time_gap",730)
 
-office_mail_id = os.environ.get("office_mail_id",'eodcacc@gmail.com')
-
+office_mail_id = os.environ.get("office_mail_id")
+#,'eodcacc@gmail.com'
 # deputy_cmsnr = 'Megha Gupta'
 # epcg_time_gap = 2555
 # letter_time_gap = 30
