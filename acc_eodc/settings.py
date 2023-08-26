@@ -21,13 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")                                              #############################
+#SECRET_KEY = 'django-insecure-)c_)%ppda)+iz^_kyp#r+$akx^zt++uo7a%*9da#+_^)x!&9_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","False").lower() == "true"
+DEBUG = os.environ.get("DEBUG","False").lower() == "true"                              #############################
+#DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")                              #############################
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -94,9 +96,9 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
+database_url = os.environ.get("DATABASE_URL")                                          #############################
 DATABASES["default"]= dj_database_url.parse(database_url)
-
+#DATABASES["default"]=dj_database_url.parse("postgres://acc_eodc_user:oOtZY2QsmnyONWBLQfPDaA1pNsyHugqe@dpg-cjkgugdk5scs73dqmdd0-a.singapore-postgres.render.com/acc_eodc")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -162,15 +164,17 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = os.environ.get("sender_email",'bhanuprakashnaidu13579@gmail.com')##'bhanu.prakash13579@gov.in'
-EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd",'grwfoxfjhzgcscgk')
+EMAIL_HOST_USER = os.environ.get("sender_email",'bhanuprakashnaidu13579@gmail.com')     #############################
+#EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd",'grwfoxfjhzgcscgk')             #############################
+#EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk'
 
 # If DEBUG is True, Django will serve static files during development
 if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-deputy_cmsnr = os.environ.get("deputy_cmsnr","Acting")
+deputy_cmsnr = os.environ.get("deputy_cmsnr","Acting")                                #############################
 epcg_time_gap = os.environ.get("epcg_time_gap",2555)
 letter_time_gap = os.environ.get("letter_time_gap",30)
 ph1_time_gap = os.environ.get("ph1_time_gap",30)
@@ -180,3 +184,14 @@ oio_time_gap = os.environ.get("oio_time_gap",30)
 decc_time_gap = os.environ.get("decc_time_gap",730)
 
 office_mail_id = os.environ.get("office_mail_id",'eodcacc@gmail.com')
+
+# deputy_cmsnr = 'Megha Gupta'
+# epcg_time_gap = 2555
+# letter_time_gap = 30
+# ph1_time_gap = 30
+# ph2_time_gap = 30
+# oio_time_gap = 30
+#
+# decc_time_gap = 730
+#
+# office_mail_id = 'bellamkondadileep125@gmail.com'

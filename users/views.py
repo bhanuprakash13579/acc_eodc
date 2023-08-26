@@ -118,7 +118,58 @@ def send_reminder_emails(request):
             # Send the email
             email.send()
 
+    for record in decc_letter_records:
+        subject = 'License Expiry Reminder'
+        message = f"Your license for bond number {record.bond_number} is about to expire."
+        from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
+        recipient_list = [record.gmail_id]
+
+        html_content = render_to_string('letter.html', {'data': record, 'base64_image': base64_image,'DC':settings.deputy_cmsnr,"present_date":timezone.now()})
+
+        # Generate the PDF from the HTML content
+        pdf_stream = generate_pdf(html_content)
+        pdf_bytes = pdf_stream.getvalue()
+
+
+        if pdf_bytes:
+            # Attach the PDF to the email
+            pdf_file = BytesIO(pdf_bytes)
+            pdf_filename = f'license_reminder_{record.bond_number}.pdf'
+
+            # Create the email message with attached PDF
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+
+            # Send the email
+            email.send()
+
     for record in scn_records:
+        subject = 'SCN to be issued as license is expired'
+        message = f"please send SCN for  bond number {record.bond_number} ."
+        from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
+        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+
+        html_content = render_to_string('SCN.html',
+                                        {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
+                                         "present_date": timezone.now()})
+
+        # Generate the PDF from the HTML content
+        pdf_stream = generate_pdf(html_content)
+        pdf_bytes = pdf_stream.getvalue()
+
+        if pdf_bytes:
+            # Attach the PDF to the email
+            pdf_file = BytesIO(pdf_bytes)
+            pdf_filename = f'SCN_{record.bond_number}.pdf'
+
+            # Create the email message with attached PDF
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+
+            # Send the email
+            email.send()
+
+    for record in decc_scn_records:
         subject = 'SCN to be issued as license is expired'
         message = f"please send SCN for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
@@ -170,6 +221,32 @@ def send_reminder_emails(request):
             # Send the email
             email.send()
 
+    for record in decc_ph1_records:
+        subject = 'PH1 to be issued as SCN time is over'
+        message = f"please send PH1 for  bond number {record.bond_number} ."
+        from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
+        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+
+        html_content = render_to_string('ph1.html',
+                                        {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
+                                         "present_date": timezone.now()})
+
+        # Generate the PDF from the HTML content
+        pdf_stream = generate_pdf(html_content)
+        pdf_bytes = pdf_stream.getvalue()
+
+        if pdf_bytes:
+            # Attach the PDF to the email
+            pdf_file = BytesIO(pdf_bytes)
+            pdf_filename = f'PH1_{record.bond_number}.pdf'
+
+            # Create the email message with attached PDF
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+
+            # Send the email
+            email.send()
+
     for record in ph2_records:
         subject = 'PH2 to be issued as PH1 time is over'
         message = f"please send PH2 for  bond number {record.bond_number} ."
@@ -196,7 +273,59 @@ def send_reminder_emails(request):
             # Send the email
             email.send()
 
+    for record in decc_ph2_records:
+        subject = 'PH2 to be issued as PH1 time is over'
+        message = f"please send PH2 for  bond number {record.bond_number} ."
+        from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
+        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+
+        html_content = render_to_string('ph2.html',
+                                        {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
+                                         "present_date": timezone.now()})
+
+        # Generate the PDF from the HTML content
+        pdf_stream = generate_pdf(html_content)
+        pdf_bytes = pdf_stream.getvalue()
+
+        if pdf_bytes:
+            # Attach the PDF to the email
+            pdf_file = BytesIO(pdf_bytes)
+            pdf_filename = f'PH2_{record.bond_number}.pdf'
+
+            # Create the email message with attached PDF
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+
+            # Send the email
+            email.send()
+
     for record in oio_records:
+        subject = 'OIO to be issued as ph2 time is over'
+        message = f"please send OIO for  bond number {record.bond_number} ."
+        from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
+        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+
+        html_content = render_to_string('oio.html',
+                                        {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
+                                         "present_date": timezone.now()})
+
+        # Generate the PDF from the HTML content
+        pdf_stream = generate_pdf(html_content)
+        pdf_bytes = pdf_stream.getvalue()
+
+        if pdf_bytes:
+            # Attach the PDF to the email
+            pdf_file = BytesIO(pdf_bytes)
+            pdf_filename = f'OIO_{record.bond_number}.pdf'
+
+            # Create the email message with attached PDF
+            email = EmailMessage(subject, message, from_email, recipient_list)
+            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+
+            # Send the email
+            email.send()
+
+    for record in decc_oio_records:
         subject = 'OIO to be issued as ph2 time is over'
         message = f"please send OIO for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
