@@ -16,7 +16,7 @@ from .models import Importer
 
 from io import BytesIO
 import subprocess
-import win32com.client
+#import win32com.client
 import pythoncom
 from acc_eodc import settings
 
