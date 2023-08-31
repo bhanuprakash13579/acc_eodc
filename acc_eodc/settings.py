@@ -17,19 +17,27 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+is_local = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")                                              #############################
-#SECRET_KEY = 'django-insecure-)c_)%ppda)+iz^_kyp#r+$akx^zt++uo7a%*9da#+_^)x!&9_c'
+if is_local:
+    SECRET_KEY = 'django-insecure-)c_)%ppda)+iz^_kyp#r+$akx^zt++uo7a%*9da#+_^)x!&9_c'
+else:
+    SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","False").lower() == "true"                              #############################
-#DEBUG = True
+if is_local:
+    DEBUG = True
+else:
+    DEBUG = os.environ.get("DEBUG","False").lower() == "true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")                              #############################
-#ALLOWED_HOSTS = []
+if is_local:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+
 
 # Application definition
 
@@ -96,8 +104,9 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")                                          #############################
-DATABASES["default"]= dj_database_url.parse(database_url)
+if not is_local:
+    database_url = os.environ.get("DATABASE_URL")
+    DATABASES["default"]= dj_database_url.parse(database_url)
 #DATABASES["default"]=dj_database_url.parse("postgres://acc_eodc_user:oOtZY2QsmnyONWBLQfPDaA1pNsyHugqe@dpg-cjkgugdk5scs73dqmdd0-a.singapore-postgres.render.com/acc_eodc")
 
 # Password validation
@@ -160,39 +169,44 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # SMTP settings
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT=587                                                                   #############################
-#EMAIL_PORT = 465
+EMAIL_PORT=587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = os.environ.get("sender_email")     #############################
-# EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd")             #############################
-# EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk' #dummy password
+if is_local:
+    EMAIL_HOST_USER = 'bhanuprakashnaidu13579@gmail.com'
+    EMAIL_HOST_PASSWORD = 'grwfoxfjhzgcscgk' #dummy password
+else:
+    EMAIL_HOST_USER = os.environ.get("sender_email")
+    EMAIL_HOST_PASSWORD = os.environ.get("sender_email_pwd")
+
 
 # If DEBUG is True, Django will serve static files during development
 if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-deputy_cmsnr = os.environ.get("deputy_cmsnr")                                #############################
-epcg_time_gap = os.environ.get("epcg_time_gap",2555)
-letter_time_gap = os.environ.get("letter_time_gap",30)
-ph1_time_gap = os.environ.get("ph1_time_gap",30)
-ph2_time_gap = os.environ.get("ph2_time_gap",30)
-oio_time_gap = os.environ.get("oio_time_gap",30)
+if is_local:
+    #office_mail_id = 'eodcacc@gmail.com'
+    deputy_cmsnr = 'Megha Gupta'
+    epcg_time_gap = 2555
+    letter_time_gap = 30
+    ph1_time_gap = 30
+    ph2_time_gap = 30
+    oio_time_gap = 30
 
-decc_time_gap = os.environ.get("decc_time_gap",730)
+    decc_time_gap = 730
 
-office_mail_id = os.environ.get("office_mail_id")
-#,'eodcacc@gmail.com'
-# deputy_cmsnr = 'Megha Gupta'
-# epcg_time_gap = 2555
-# letter_time_gap = 30
-# ph1_time_gap = 30
-# ph2_time_gap = 30
-# oio_time_gap = 30
-#
-# decc_time_gap = 730
-#
-# office_mail_id = 'bellamkondadileep125@gmail.com'
+    office_mail_id = 'bellamkondadileep125@gmail.com'
+
+else:
+    deputy_cmsnr = os.environ.get("deputy_cmsnr")
+    epcg_time_gap = os.environ.get("epcg_time_gap",2555)
+    letter_time_gap = os.environ.get("letter_time_gap",30)
+    ph1_time_gap = os.environ.get("ph1_time_gap",30)
+    ph2_time_gap = os.environ.get("ph2_time_gap",30)
+    oio_time_gap = os.environ.get("oio_time_gap",30)
+
+    decc_time_gap = os.environ.get("decc_time_gap",730)
+
+    office_mail_id = os.environ.get("office_mail_id")
