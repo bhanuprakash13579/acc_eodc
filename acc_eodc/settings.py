@@ -197,16 +197,16 @@ if is_local:
 
     decc_time_gap = 730
 
-    office_mail_id = 'bellamkondadileep125@gmail.com'
+    office_mail_id = 'lingutlabhanuprakash@gmail.com'
 
 else:
     deputy_cmsnr = os.environ.get("deputy_cmsnr")
-    epcg_time_gap = os.environ.get("epcg_time_gap",2555)
-    letter_time_gap = os.environ.get("letter_time_gap",30)
-    ph1_time_gap = os.environ.get("ph1_time_gap",30)
-    ph2_time_gap = os.environ.get("ph2_time_gap",30)
-    oio_time_gap = os.environ.get("oio_time_gap",30)
+    epcg_time_gap = int(os.environ.get("epcg_time_gap",2555))
+    letter_time_gap = int(os.environ.get("letter_time_gap",30))
+    ph1_time_gap = int(os.environ.get("ph1_time_gap",30))
+    ph2_time_gap = int(os.environ.get("ph2_time_gap",30))
+    oio_time_gap = int(os.environ.get("oio_time_gap",30))
 
-    decc_time_gap = os.environ.get("decc_time_gap",730)
+    decc_time_gap = int(os.environ.get("decc_time_gap",730))
 
     office_mail_id = os.environ.get("office_mail_id")

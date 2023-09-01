@@ -1,3 +1,4 @@
+from datetime import datetime
 from datetime import timedelta
 from io import BytesIO
 
@@ -9,6 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
+from pytz import timezone
 from xhtml2pdf import pisa
 
 # import win32com.client
@@ -25,27 +27,12 @@ def generate_pdf(html_content):
         return result
     return None
 
-# def generate_word_byte_data(pdf_stream):
-#     docx_stream = BytesIO()
-#     subprocess.run(['pdftotext', '-', '-'], input=pdf_stream.read(), stdout=docx_stream, check=True)
-#     docx_stream.seek(0)
-#
-#     return docx_stream.getvalue()
-
-# def generate_word_byte_data(html_content):
-#     print('--------------------------------------3')
-#     word = win32com.client.Dispatch('Word.Application', pythoncom.CoInitialize())
-#     print('--------------------------------------4')
-#     doc = word.Documents.Add(html_content)
-#     print('--------------------------------------5')
-#     doc.SaveAs('example.doc', FileFormat=0)
-#     return doc
 
 @never_cache
 @login_required
 def send_reminder_emails(request):
     # Get today's date0
-    today = timezone.now().date()
+    today = datetime.now(timezone("Asia/Kolkata"))
 
     # Calculate the date  days ago
     epcg_time_gap = today - timedelta(days=settings.epcg_time_gap)
@@ -99,12 +86,11 @@ def send_reminder_emails(request):
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
         recipient_list = [record.gmail_id]
 
-        html_content = render_to_string('letter.html', {'data': record, 'base64_image': base64_image,'DC':settings.deputy_cmsnr,"present_date":timezone.now()})
+        html_content = render_to_string('letter.html', {'data': record, 'base64_image': base64_image,'DC':settings.deputy_cmsnr,"present_date":datetime.now(timezone("Asia/Kolkata").strftime('%d-%m-%Y'))})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
         pdf_bytes = pdf_stream.getvalue()
-
 
         if pdf_bytes:
             # Attach the PDF to the email
@@ -115,6 +101,7 @@ def send_reminder_emails(request):
             email = EmailMessage(subject, message, from_email, recipient_list)
             email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
 
+
             # Send the email
             email.send()
 
@@ -124,7 +111,7 @@ def send_reminder_emails(request):
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
         recipient_list = [record.gmail_id]
 
-        html_content = render_to_string('letter.html', {'data': record, 'base64_image': base64_image,'DC':settings.deputy_cmsnr,"present_date":timezone.now()})
+        html_content = render_to_string('letter.html', {'data': record, 'base64_image': base64_image,'DC':settings.deputy_cmsnr,"present_date":datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -151,7 +138,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('SCN.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -177,7 +164,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('SCN.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -203,7 +190,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('ph1.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -229,7 +216,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('ph1.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -255,7 +242,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('ph2.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -281,7 +268,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('ph2.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -307,7 +294,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('oio.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
@@ -333,7 +320,7 @@ def send_reminder_emails(request):
 
         html_content = render_to_string('oio.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
-                                         "present_date": timezone.now()})
+                                         "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
