@@ -47,43 +47,46 @@ def send_reminder_emails(request):
     decc_ph2_time_gap = decc_ph1_time_gap + timedelta(days=settings.ph2_time_gap)
     decc_oio_time_gap = decc_ph2_time_gap + timedelta(days=settings.oio_time_gap)
 
+    all_records = Importer.objects.get()
+    epcg_records = all_records.objects.get(radio_choice = 'EPCG')
+    decc_records = all_records.objects.get(radio_choice = 'DECC')
     # for epcg
-    letter_records = Importer.objects.filter(lic_date__lte=epcg_letter_time_gap,is_paused=False,is_closed=False,
+    letter_records = epcg_records.objects.filter(lic_date__lte=epcg_letter_time_gap,is_paused=False,is_closed=False,
                                              is_eodc_produced=False,is_dgft_ack_produced=False,is_letter_issued=False)
 
-    scn_records = Importer.objects.filter(lic_date__lte=epcg_time_gap,is_paused=False,is_closed=False,
+    scn_records = epcg_records.objects.filter(lic_date__lte=epcg_time_gap,is_paused=False,is_closed=False,
                                           is_letter_issued=True,is_eodc_produced=False,is_dgft_ack_produced=False,
                                           is_scn_issued=False)
 
-    ph1_records = Importer.objects.filter(lic_date__lte=epcg_ph1_time_gap,is_paused=False,is_closed=False,
+    ph1_records = epcg_records.objects.filter(lic_date__lte=epcg_ph1_time_gap,is_paused=False,is_closed=False,
                                           is_scn_issued=True, is_letter_issued=True, is_eodc_produced = False,
                                           is_dgft_ack_produced=False,is_ph1_issued=False)
 
-    ph2_records = Importer.objects.filter(lic_date__lte=epcg_ph2_time_gap,is_paused=False,is_closed=False,
+    ph2_records = epcg_records.objects.filter(lic_date__lte=epcg_ph2_time_gap,is_paused=False,is_closed=False,
                                           is_ph1_issued=True, is_scn_issued=True, is_letter_issued=True, is_eodc_produced = False,
                                           is_dgft_ack_produced=False,is_ph2_issued=False)
 
-    oio_records = Importer.objects.filter(lic_date__lte=epcg_oio_time_gap,is_paused=False,is_closed=False,
+    oio_records = epcg_records.objects.filter(lic_date__lte=epcg_oio_time_gap,is_paused=False,is_closed=False,
                                           is_ph2_issued=True, is_ph1_issued=True, is_scn_issued=True, is_letter_issued=True,
                                           is_eodc_produced = False, is_dgft_ack_produced=False,is_oio_issued=False)
 
     #for DECC
-    decc_letter_records = Importer.objects.filter(lic_date__lte=decc_letter_time_gap, is_paused=False, is_closed=False,
+    decc_letter_records = decc_records.objects.filter(lic_date__lte=decc_letter_time_gap, is_paused=False, is_closed=False,
                                                   is_eodc_produced=False, is_dgft_ack_produced=False,is_letter_issued=False)
 
-    decc_scn_records = Importer.objects.filter(lic_date__lte=decc_time_gap, is_paused=False, is_closed=False,
+    decc_scn_records = decc_records.objects.filter(lic_date__lte=decc_time_gap, is_paused=False, is_closed=False,
                                                is_letter_issued=True, is_eodc_produced=False, is_dgft_ack_produced=False,
                                                is_scn_issued=False)
 
-    decc_ph1_records = Importer.objects.filter(lic_date__lte=decc_ph1_time_gap, is_paused=False, is_closed=False,
+    decc_ph1_records = decc_records.objects.filter(lic_date__lte=decc_ph1_time_gap, is_paused=False, is_closed=False,
                                           is_scn_issued=True, is_letter_issued=True, is_eodc_produced=False,
                                           is_dgft_ack_produced=False,is_ph1_issued=False)
 
-    decc_ph2_records = Importer.objects.filter(lic_date__lte=decc_ph2_time_gap, is_paused=False, is_closed=False,
+    decc_ph2_records = decc_records.objects.filter(lic_date__lte=decc_ph2_time_gap, is_paused=False, is_closed=False,
                                           is_ph1_issued=True, is_scn_issued=True, is_letter_issued=True,
                                           is_eodc_produced=False, is_dgft_ack_produced=False,is_ph2_issued=False)
 
-    decc_oio_records = Importer.objects.filter(lic_date__lte=decc_oio_time_gap, is_paused=False, is_closed=False,
+    decc_oio_records = decc_records.objects.filter(lic_date__lte=decc_oio_time_gap, is_paused=False, is_closed=False,
                                           is_ph2_issued=True, is_ph1_issued=True, is_scn_issued=True,
                                           is_letter_issued=True, is_eodc_produced=False, is_dgft_ack_produced=False,
                                           is_oio_issued=False)
