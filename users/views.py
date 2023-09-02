@@ -104,6 +104,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_letter_issued'] = True
+        record.save()
 
     for record in decc_letter_records:
         subject = 'License Expiry Reminder'
@@ -129,6 +131,9 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_letter_issued'] = True
+        record.save()
+
 
     for record in scn_records:
         subject = 'SCN to be issued as license is expired'
@@ -155,6 +160,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_scn_issued'] = True
+        record.save()
 
     for record in decc_scn_records:
         subject = 'SCN to be issued as license is expired'
@@ -181,6 +188,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_scn_issued'] = True
+        record.save()
 
     for record in ph1_records:
         subject = 'PH1 to be issued as SCN time is over'
@@ -207,6 +216,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_ph1_issued'] = True
+        record.save()
 
     for record in decc_ph1_records:
         subject = 'PH1 to be issued as SCN time is over'
@@ -233,6 +244,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_ph1_issued'] = True
+        record.save()
 
     for record in ph2_records:
         subject = 'PH2 to be issued as PH1 time is over'
@@ -259,6 +272,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_ph2_issued'] = True
+        record.save()
 
     for record in decc_ph2_records:
         subject = 'PH2 to be issued as PH1 time is over'
@@ -285,6 +300,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_ph2_issued'] = True
+        record.save()
 
     for record in oio_records:
         subject = 'OIO to be issued as ph2 time is over'
@@ -311,6 +328,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_oio_issued'] = True
+        record.save()
 
     for record in decc_oio_records:
         subject = 'OIO to be issued as ph2 time is over'
@@ -337,6 +356,8 @@ def send_reminder_emails(request):
 
             # Send the email
             email.send()
+        record['is_oio_issued'] = True
+        record.save()
     # Redirect back to the home page
     return redirect('home')
 
