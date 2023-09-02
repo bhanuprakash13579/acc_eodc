@@ -2,8 +2,26 @@
 {% load static %}
 {% block content %}
 <h1>
-    {% for i,j in data.items %}
-         <p>{{ i }}  :   {{ j }}</p>
-    {% endfor %}
+    importer_name = {{ data.importer_name }} <br>
+    address = {{ data.address }} <br>
+    license_number = {{ data.license_number }} <br>
+    lic_date = {{ data.lic_date }} <br>
+    bond_number = {{ data.bond_number }}<br>
+    gmail_id = {{ data.gmail_id }}<br>
+    bond_type = {{ data.radio_choice }}<br>
+    bond_amt_executed = {{ data.bond_amt_executed }} <br>
+    bond_date = {{ data.bond_date }} <br>
+    duty_saved = {{ data.duty_saved }} <br>
+    iec_code = {{ data.iec_code }} <br>
+    items_imported = {{ data.items_imported }} <br><br><br>
+    is_eodc_produced = {{ data.is_eodc_produced }}<br>
+    is_dgft_ack_produced = {{ data.is_dgft_ack_produced }}<br>
+    is_letter_issued = {{ data.is_letter_issued }}<br>
+    is_scn_issued = {{ data.is_scn_issued }}<br>
+    is_ph1_issued = {{ data.is_ph1_issued }}<br>
+    is_ph2_issued = {{ data.is_ph2_issued }}<br>
+    is_oio_issued = {{ data.is_oio_issued }}<br>
+    is_paused = {{ data.is_paused }}<br>
+    is_closed = {{ data.is_closed }}<br>
 </h1>
 {% endblock %}

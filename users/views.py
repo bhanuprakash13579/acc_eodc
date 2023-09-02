@@ -47,9 +47,6 @@ def send_reminder_emails(request):
     decc_ph2_time_gap = decc_ph1_time_gap + timedelta(days=settings.ph2_time_gap)
     decc_oio_time_gap = decc_ph2_time_gap + timedelta(days=settings.oio_time_gap)
 
-    all_records = Importer.objects.get()
-    #epcg_records = all_records.objects.get(radio_choice = 'EPCG')
-    #decc_records = all_records.objects.get(radio_choice = 'DECC')
     # for epcg
     letter_records = Importer.objects.filter(radio_choice = 'EPCG',lic_date__lte=epcg_letter_time_gap,is_paused=False,is_closed=False,
                                              is_eodc_produced=False,is_dgft_ack_produced=False,is_letter_issued=False)
