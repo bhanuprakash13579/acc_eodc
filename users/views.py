@@ -97,7 +97,7 @@ def send_reminder_emails(request):
         subject = 'OIO to be issued as ph2 time is over'
         message = f"please send OIO for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id
 
         html_content = render_to_string('oio.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -125,7 +125,7 @@ def send_reminder_emails(request):
         subject = 'OIO to be issued as ph2 time is over'
         message = f"please send OIO for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id  # [record.gmail_id]
 
         html_content = render_to_string('oio.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -153,7 +153,7 @@ def send_reminder_emails(request):
         subject = 'PH2 to be issued as PH1 time is over'
         message = f"please send PH2 for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id  # [record.gmail_id]
 
         html_content = render_to_string('ph2.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -181,7 +181,7 @@ def send_reminder_emails(request):
         subject = 'PH2 to be issued as PH1 time is over'
         message = f"please send PH2 for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id  # [record.gmail_id]
 
         html_content = render_to_string('ph2.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -209,7 +209,7 @@ def send_reminder_emails(request):
         subject = 'PH1 to be issued as SCN time is over'
         message = f"please send PH1 for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id
 
         html_content = render_to_string('ph1.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -237,7 +237,7 @@ def send_reminder_emails(request):
         subject = 'PH1 to be issued as SCN time is over'
         message = f"please send PH1 for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id
 
         html_content = render_to_string('ph1.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -265,7 +265,7 @@ def send_reminder_emails(request):
         subject = 'SCN to be issued as license is expired'
         message = f"please send SCN for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id
 
         html_content = render_to_string('SCN.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
@@ -293,7 +293,7 @@ def send_reminder_emails(request):
         subject = 'SCN to be issued as license is expired'
         message = f"please send SCN for  bond number {record.bond_number} ."
         from_email = settings.EMAIL_HOST_USER  # Use the configured from_email from settings
-        recipient_list = ['eodcacc@gmail.com']  # [record.gmail_id]
+        recipient_list = settings.office_mail_id
 
         html_content = render_to_string('SCN.html',
                                         {'data': record, 'base64_image': base64_image, 'DC': settings.deputy_cmsnr,
