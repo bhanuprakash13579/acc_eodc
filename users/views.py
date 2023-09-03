@@ -18,6 +18,51 @@ from acc_eodc import settings
 from .forms import ImporterForm
 from .models import Importer
 
+# from docx import Document
+# #from docx.shared import Inches
+# #from docx.enum.text import WD_ALIGN_PARAGRAPH
+# from docx2txt import process
+#
+# def generate_docx_from_html(html_content):
+#     # Create a new Document object
+#     doc = Document()
+#
+#     # Process HTML content and add it to the DOCX document
+#     process(html_content, "output.docx")
+#
+#     # Load the processed DOCX file
+#     docx = Document("output.docx")
+#
+#     # Add the content from the processed DOCX to the new DOCX document
+#     for element in docx.element.body:
+#         doc.element.body.append(element)
+#
+#     return doc
+
+import pypandoc
+import tempfile
+import os
+
+def generate_docx_from_html(html_content):
+    # Create a temporary output file
+    output_file = tempfile.NamedTemporaryFile(suffix='.docx', delete=False)
+    output_path = output_file.name
+    output_file.close()
+
+    # Convert HTML to DOCX and specify the output file
+    pypandoc.convert_text(html_content, 'docx', format='html', outputfile=output_path)
+
+    # Read the generated DOCX file as bytes
+    with open(output_path, 'rb') as docx_file:
+        docx_byte_data = docx_file.read()
+
+    # Delete the temporary output file
+    os.remove(output_path)
+
+    return docx_byte_data
+
+
+
 
 def generate_pdf(html_content):
     result = BytesIO()
@@ -101,17 +146,21 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'OIO_{record.bond_number}.pdf'
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'OIO_{record.bond_number}.pdf'
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('oio_epcg_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -129,17 +178,20 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'OIO_{record.bond_number}.pdf'
-
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'OIO_{record.bond_number}.pdf'
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('oio_decc_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -157,17 +209,22 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'PH2_{record.bond_number}.pdf'
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'PH2_{record.bond_number}.pdf'
 
             # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('ph2_epcg_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -185,17 +242,21 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'PH2_{record.bond_number}.pdf'
-
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'PH2_{record.bond_number}.pdf'
             # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('ph2_decc_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -213,17 +274,21 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'PH1_{record.bond_number}.pdf'
-
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'PH1_{record.bond_number}.pdf'
+        # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('ph1_epcg_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -241,17 +306,21 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'PH1_{record.bond_number}.pdf'
-
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'PH1_{record.bond_number}.pdf'
+        # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('ph1_decc_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -269,17 +338,21 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        # pdf_stream = generate_pdf(html_content)
+        # pdf_bytes = pdf_stream.getvalue()
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'SCN_{record.bond_number}.pdf'
-
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'SCN_{record.bond_number}.pdf'
+        # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            email.attach('scn_epcg_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -297,17 +370,23 @@ def send_reminder_emails(request):
                                          "present_date": datetime.now(timezone("Asia/Kolkata")).strftime('%d-%m-%Y')})
 
         # Generate the PDF from the HTML content
-        pdf_stream = generate_pdf(html_content)
-        pdf_bytes = pdf_stream.getvalue()
+        #pdf_stream = generate_pdf(html_content)
+        #pdf_bytes = pdf_stream.getvalue()
 
-        if pdf_bytes:
-            # Attach the PDF to the email
-            pdf_file = BytesIO(pdf_bytes)
-            pdf_filename = f'SCN_{record.bond_number}.pdf'
+        # Generate the DOCX file from HTML
+        docx_byte_data = generate_docx_from_html(html_content)
 
-            # Create the email message with attached PDF
+        # if pdf_bytes:
+        #     # Attach the PDF to the email
+        #     pdf_file = BytesIO(pdf_bytes)
+        #     pdf_filename = f'SCN_{record.bond_number}.pdf'
+        # Create the email message with attached PDF
+        if docx_byte_data:
             email = EmailMessage(subject, message, from_email, recipient_list)
-            email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            #email.attach(pdf_filename, pdf_file.read(), 'application/pdf')
+            # Attach the DOCX file
+            email.attach('scn_decc_reminder.docx', docx_byte_data,
+                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
 
             # Send the email
             email.send()
@@ -352,6 +431,7 @@ def send_reminder_emails(request):
         # Generate the PDF from the HTML content
         pdf_stream = generate_pdf(html_content)
         pdf_bytes = pdf_stream.getvalue()
+
 
 
         if pdf_bytes:
@@ -481,10 +561,6 @@ def modify_data(request):
         return render(request, 'search_modify.html')
 
 
-# deleted code for modify_data.html
-# {% for i,j in present.items %}
-#         <p>{{ i }}  :   {{ j }}</p> &ensp; <input type="text" name="username" ><br><br>
-#       {% endfor %}
 
 @never_cache
 @login_required
