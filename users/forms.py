@@ -1,6 +1,7 @@
 import re
 from django import forms
 from .models import Importer
+from django.forms import DateInput
 
 
 def validate_gmail(value):
@@ -36,7 +37,8 @@ class ImporterForm(forms.ModelForm):
             'radio_choice',
             ]
         widgets = {
-            'lic_date': forms.DateInput(),
+            'lic_date': forms.DateInput(attrs={'type': 'date'}),
+            'bond_date': forms.DateInput(attrs={'type': 'date'}),
             'is_eodc_produced': forms.HiddenInput,
             'is_dgft_ack_produced': forms.HiddenInput,
             'is_letter_issued': forms.HiddenInput,
