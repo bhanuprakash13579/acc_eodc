@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background-color: #84A7A1; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+    <form method="post" action="{% url 'create_excel_file' %}" style="background-color: #E5E5CB; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); width: 200px;">
+      {% csrf_token %}
+        <div align="center">
+        <label for="start_date">Start date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        <label for="end_date">Start date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+        <input type="radio" id="EPCG" name="bond_type" value="EPCG" required>EPCG&ensp;&ensp;&ensp;&ensp;
+        <input type="radio" id="DECC" name="bond_type" value="DECC">DECC<br><br>
+        <button  type="submit" id="submit-button" style="background-color: #363333; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Send</button>
+        </div>
+    </form>
+    <a href="{% url 'home' %}" style="margin-top: 10px; position: fixed; bottom: 20px; right: 16px"><button>Back to Home</button></a>
+  </div>
+<div>
+    <a href="{% url 'login' %}" style="margin-right: 10px; position: fixed; top: 20px; right: 16px "><button>Logout</button></a>
+  </div>
+
+{% endblock %}

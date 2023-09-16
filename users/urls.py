@@ -9,5 +9,7 @@ urlpatterns = [
     path('modify_data/', views.modify_data, name='modify_data'),
     path('update_data/', views.update_data, name='update_data'),
     path('send_reminder_emails/', views.send_reminder_emails, name='send_reminder_emails'),
+    path('send_excel/', views.send_excel, name='send_excel'),
+    path('create_excel_file/', views.create_excel_file, name='create_excel_file'),
 ]
 
